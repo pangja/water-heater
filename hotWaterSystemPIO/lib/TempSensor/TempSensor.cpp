@@ -2,12 +2,13 @@
 
 TempSensor::TempSensor(int sensorPin)
 {
-    dataPin=sensorPin;
+    pin = sensorPin;
+    pinMode(pin, INPUT);
 }
 
 // Date member function
 int TempSensor::readTemp()
 {
-    //int rawValue = analogueread(dataPin)
-    // return temp = processed value
+    int rawValue = digitalRead(pin);
+    return temp = rawValue; // PROCESS RAW VALUE
 }

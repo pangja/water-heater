@@ -1,10 +1,11 @@
 #ifndef TEMPSENSOR_H
 #define TEMPSENSOR_H
+#include "Arduino.h"
 
 class TempSensor
 {
 private:
-    int dataPin;
+    int pin;
     int temp;
     int aveTemp;
 
