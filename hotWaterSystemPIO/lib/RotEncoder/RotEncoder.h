@@ -11,11 +11,14 @@ private:
     int debounceDelay = 50;
     int currentStateCLK;
     int lastStateCLK;
-String currentDir ="";
+
 public:
+    String currentDir = "";
+    bool rotation = false;
+    int val;
     int counter;
     RotEncoder(int clk, int dt);
-    int readEncoder();
+    void readEncoder();
 };
 
 #endif

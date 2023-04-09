@@ -4,6 +4,8 @@
 #include <LevelSensor.h>
 #include <PowerButton.h>
 #include <Relay.h>
+#include <RotEncoder.h>
+#include <Pins.h>
 
 int mode = 0;
 int lastMode = 0;
@@ -11,11 +13,14 @@ int waterTempThresh = 60;
 int airTempThresh = 50;
 int waterTemp;
 int airTemp;
+int menuItem = 1;
+
+RotEncoder encoder(CLK, DT);
 
 void setup() {
   // put your setup code here, to run once:
   // initialise display
-
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -27,17 +32,22 @@ void loop() {
   // case [3]: pump on, diverter position 1, ball valve closed
   // case [4]: pump off, diveter position (hot air), ball valve open
   ///////////////////////////////////////////////////////////////////////////
-  if (mode != lastMode) {
-    switch (mode) {
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3;
-        break;
-      case 4
-        break;
-    }
-  }
-
+  // if (mode != lastMode) {
+  //   switch (mode) {
+  //     case 1:
+  //       break;
+  //     case 2:
+  //       break;
+  //     case 3;
+  //       break;
+  //     case 4
+  //       break;
+  //   }
+  // }
+  encoder.readEncoder();
+  // if (encoder.rotation == true) {
+  //   encoder.rotation = false;
+  //   menuItem = menuItem + encoder.val;
+  //   Serial.print(menuItem);
+  // }
 }
