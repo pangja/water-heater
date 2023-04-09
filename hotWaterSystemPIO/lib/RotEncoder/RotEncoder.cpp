@@ -4,7 +4,7 @@ RotEncoder::RotEncoder(int CLK, int DT) {
     clk = CLK;
     dt = DT;
     pinMode(clk, INPUT);
-    piMode(dt, INPUT);
+    pinMode(dt, INPUT);
     lastStateCLK = digitalRead(clk);
     	// Setup Serial Monitor
 	Serial.begin(9600);
