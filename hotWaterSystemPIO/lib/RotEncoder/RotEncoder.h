@@ -7,17 +7,17 @@ class RotEncoder
 private:
     int clk;
     int dt;
-    long lastDebounceTime = 0;
-    int debounceDelay = 50;
+    int sw;
     int currentStateCLK;
     int lastStateCLK;
+    unsigned long lastButtonPress = 0;
+    int btnState;
 
 public:
-    String currentDir = "";
     bool rotation = false;
+    bool btnPress = false;
     int val;
-    int counter;
-    RotEncoder(int clk, int dt);
+    RotEncoder(int clk, int dt, int sw);
     void readEncoder();
 };
 
