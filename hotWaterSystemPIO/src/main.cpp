@@ -45,9 +45,15 @@ void loop() {
   //   }
   // }
   encoder.readEncoder();
-  // if (encoder.rotation == true) {
-  //   encoder.rotation = false;
-  //   menuItem = menuItem + encoder.val;
-  //   Serial.print(menuItem);
-  // }
+  if (encoder.rotation == true) {
+    encoder.rotation = false;
+    menuItem = menuItem + encoder.val;
+    if (menuItem > 3) {
+      menuItem = 3;
+    }
+    else if (menuItem < 1) {
+      menuItem = 1;
+    }
+    Serial.println(menuItem); // Debugging
+  }
 }
