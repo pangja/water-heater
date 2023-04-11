@@ -34,6 +34,12 @@ void setup() {
 void loop() {
 
   tempSensors.getTemperatures();
+  Serial.print("Water Temp: ");
+  Serial.println(tempSensors.waterTemp);
+  Serial.print("Water Temp: ");
+  Serial.println(tempSensors.airTemp);
+
+
   ////////////////////////////////////////////////////////////////////////////
   // modes: [0] off, [1] on, [2] fill
 

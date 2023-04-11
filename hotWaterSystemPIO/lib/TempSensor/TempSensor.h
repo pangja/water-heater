@@ -8,16 +8,14 @@ class TempSensor
 {
 private:
     int numberOfDevices;
-    int pin;
-    long waterTemp;
-    long airTemp; 
 
 public:
+    float waterTemp;
+    float airTemp; 
     long aveWaterTemp;
     long aveAirTemp;
 
     TempSensor();
-
     void getTemperatures();
 };
 

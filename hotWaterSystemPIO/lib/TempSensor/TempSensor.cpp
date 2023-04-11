@@ -48,16 +48,11 @@ void TempSensor::getTemperatures()
     // Search the wire for address
     if(sensors.getAddress(tempDeviceAddress, i)){
     
-    // Output the device ID
-    Serial.print("Temperature for device: ");
-    Serial.println(i,DEC);
-
-    // Print the data
-    float tempC = sensors.getTempC(tempDeviceAddress);
-    Serial.print("Temp C: ");
-    Serial.print(tempC);
-    Serial.print(" Temp F: ");
-    Serial.println(DallasTemperature::toFahrenheit(tempC)); // Converts tempC to Fahrenheit
+    if (i == 0) {
+        waterTemp = sensors.getTempC(tempDeviceAddress);
+    } else {
+        airTemp = sensors.getTempC(tempDeviceAddress);
+    }
     }   
   }
   delay(5000);
