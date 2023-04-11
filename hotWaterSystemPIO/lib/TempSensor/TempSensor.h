@@ -1,18 +1,24 @@
 #ifndef TEMPSENSOR_H
 #define TEMPSENSOR_H
+#include "OneWire.h"
+#include "DallasTemperature.h"
 #include "Arduino.h"
 
 class TempSensor
 {
 private:
+    int numberOfDevices;
     int pin;
-    int temp;
-    int aveTemp;
+    long waterTemp;
+    long airTemp; 
 
 public:
-    TempSensor(int sensorPin);
+    long aveWaterTemp;
+    long aveAirTemp;
 
-    int readTemp();
+    TempSensor();
+
+    void getTemperatures();
 };
 
 #endif

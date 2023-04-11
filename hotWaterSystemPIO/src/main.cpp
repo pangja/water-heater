@@ -7,6 +7,7 @@
 #include <Relay.h>
 #include <RotEncoder.h>
 #include <Pins.h>
+#include <TempSensor.h>
 
 int mode = 0;
 int lastMode = 0;
@@ -15,50 +16,54 @@ int airTempThresh = 50;
 int waterTemp;
 int airTemp;
 int menuItem = 1;
+int waterLevel = 100;
 bool edit = 0;
 int fillCommand = 0;
+unsigned long coolDownTime = 20000;
 
 RotEncoder encoder(CLK, DT, SW);
+PowerButton OnButton(ONBUT);
+TempSensor tempSensors;
 
 void setup() {
   // put your setup code here, to run once:
-  // initialise display
-  Serial.begin(9600); //For debugging
+  // display.init() initialise display
+   Serial.begin(9600); //For debugging
 }
 
 void loop() {
-  ////////////////////////////////////////////////////////////////////////////
-  // modes: [1] off, [2] on, [3] cooldown, [4] fill 
 
-  // case [1]: pump off, diverter position 1 (hot air), ball valve closed
-  // case [2]: pump off/on, diverter position 2 (hot water), ball valve closed
-  // case [3]: pump on, diverter position 1, ball valve closed
-  // case [4]: pump off, diveter position (hot air), ball valve open
+  tempSensors.getTemperatures();
+  ////////////////////////////////////////////////////////////////////////////
+  // modes: [0] off, [1] on, [2] fill
+
+  // case [0]: pump off, diverter position 1 (hot air), ball valve closed
+  // case [1]: pump off/on, diverter position 2 (hot water), ball valve closed
+  // case [2]: pump off, diveter position (hot air), ball valve open
   ///////////////////////////////////////////////////////////////////////////
-  // if (mode != lastMode) {
-  //   switch (mode) {
-  //     case 1:
-  //       break;
-  //     case 2:
-  //       break;
-  //     case 3;
-  //       break;
-  //     case 4
-  //       break;
-  //   }
-  // }
+
+  OnButton.readButton();
+  if (OnButton.buttonState != OnButton.lastButtonState) {
+    OnButton.lastButtonState = OnButton.buttonState;
+    if (OnButton.buttonState == 0) {
+      mode = 0;
+    }
+    else {
+      mode = 1;
+      fillCommand = 0;
+    }
+  }
 
   ///////////////////// Obtain Encoder Reading ////////////////////////
 
   encoder.readEncoder();
   if (encoder.btnPress == true) {
-    if (edit == false) {
+    if (edit == false) { 
       edit = true;
     }
     else {
       edit = false;
     }
-
     // UNCOMMENT FOR DEBUGGING
     // encoder.btnPress = false;
     // Serial.print("Menu Item: ");
@@ -106,17 +111,22 @@ void loop() {
           airTempThresh = 20;
         }
       case 3:
-        fillCommand = fillCommand + encoder.val;
-        if (fillCommand > 1) {
-          fillCommand= 1;
-        }
-        else if (fillCommand < 0) {
-          fillCommand = 0;
+        if (OnButton.buttonState == 0) {
+          fillCommand = fillCommand + encoder.val;
+          if (fillCommand >= 1) {
+            fillCommand = 1;
+            mode = 2;
+          }
+          else if (fillCommand <= 0) {
+            fillCommand = 0;
+            mode = 0;
+          }
         }
       default:
         break;
       }
     }
+
     // UNCOMMENT FOR DEBUGGING
     // Serial.print("Menu Item: ");
 		// Serial.print(menuItem);
@@ -129,4 +139,43 @@ void loop() {
 		// Serial.print(" | edit: ");
 		// Serial.println(edit);
   }
+
+
+  // display.update()
+
+
+  // if (mode != lastMode) {
+  //   lastMode = mode;
+  //   switch (mode) {
+  //     case 0:
+  //     pump.off();
+  //     diverter.close();
+  //     fillValve.close();
+  //       break;
+  //     case 1:
+  //     if (airTemp > airTempThresh) {
+  //       pump.on();
+  //     }
+  //     else if (airTemp < airTempThresh) {
+  //       pump.off();
+  //     }
+  //     if (waterTemp < waterTempThresh) {
+  //       diverter.open();
+  //     }
+  //     else if (waterTemp > waterTempThresh) {
+  //       diverter.close();
+  //     }
+  //     fillValve.close();
+  //       break;
+  //     case 2:
+  //     pump.off();
+  //     diverter.close();
+  //     if (waterLevel > 100) { // NNED TO RECHECK THIS STATEMENT
+  //       fillValve.close();
+  //     }
+  //     else if (waterLevel < 100)
+  //       fillValve.open();
+  //       break;
+  //   }
+  // }
 }

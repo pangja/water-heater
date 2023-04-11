@@ -8,6 +8,7 @@ private:
     int pin;
 public:
     int buttonState;
+    int lastButtonState;
 
     PowerButton(int buttonPin);
     int readButton();
