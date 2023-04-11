@@ -41,6 +41,7 @@ TempSensor::TempSensor()
 // Date member function
 void TempSensor::getTemperatures()
 {
+
   sensors.requestTemperatures(); // Send the command to get temperatures
   
   // Loop through each device, print out temperature data
@@ -55,5 +56,4 @@ void TempSensor::getTemperatures()
     }
     }   
   }
-  delay(5000);
 }

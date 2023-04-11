@@ -19,7 +19,9 @@ int menuItem = 1;
 int waterLevel = 100;
 bool edit = 0;
 int fillCommand = 0;
-unsigned long coolDownTime = 20000;
+
+unsigned long Ts = 1000; // temperature sampling time
+unsigned long lastMeasurementTime = 0;
 
 RotEncoder encoder(CLK, DT, SW);
 PowerButton OnButton(ONBUT);
@@ -33,11 +35,14 @@ void setup() {
 
 void loop() {
 
-  tempSensors.getTemperatures();
-  Serial.print("Water Temp: ");
-  Serial.println(tempSensors.waterTemp);
-  Serial.print("Water Temp: ");
-  Serial.println(tempSensors.airTemp);
+  if (millis() - lastMeasurementTime > Ts) {
+    lastMeasurementTime = millis();
+    tempSensors.getTemperatures();
+    Serial.print("Water Temp: ");
+    Serial.println(tempSensors.waterTemp);
+    Serial.print("Air Temp: ");
+    Serial.println(tempSensors.airTemp);
+  }
 
 
   ////////////////////////////////////////////////////////////////////////////
