@@ -14,8 +14,8 @@ int mode = 0;
 int lastMode = 0;
 int waterTempThresh = 60;
 int airTempThresh = 50;
-int waterTemp;
-int airTemp;
+int waterTemp = 0;
+int airTemp = 0;
 int menuItem = 1;
 int waterLevel = 100;
 bool edit = 0;
@@ -31,8 +31,8 @@ Display display;
 
 void setup() {
   // put your setup code here, to run once:
-  // display.init() initialise display
   Serial.begin(9600); //For debugging
+  display.init();
 }
 
 void loop() {
