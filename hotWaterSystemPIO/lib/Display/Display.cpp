@@ -21,9 +21,19 @@ void Display::updateDisplay(float waterTemp, int setWaterTemp, float airTemp, in
     //     break;
     //     case 3:
     //     displayFill(mode);
+    //        break;
     // }
-    displayWater(waterTemp, setWaterTemp);
-    oled.display();
+    if (menuItem == 1){
+      displayWater(waterTemp, setWaterTemp);
+      oled.display();
+    } else if (menuItem == 2) {
+      displayAir(airTemp, setAirTemp);
+      oled.display();
+    } else {
+      displayFill(mode);
+      oled.display();
+    }
+    //oled.display();
 }
 
 void Display::displayWater(long waterTemp, long setWaterTemp){

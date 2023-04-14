@@ -40,10 +40,10 @@ void loop() {
   if (millis() - lastMeasurementTime > Ts) {
     lastMeasurementTime = millis();
     tempSensors.getTemperatures();
-    Serial.print("Water Temp: ");
-    Serial.println(tempSensors.waterTemp);
-    Serial.print("Air Temp: ");
-    Serial.println(tempSensors.airTemp);
+    // Serial.print("Water Temp: ");
+    // Serial.println(tempSensors.waterTemp);
+    // Serial.print("Air Temp: ");
+    // Serial.println(tempSensors.airTemp);
   }
 
 
@@ -140,7 +140,7 @@ void loop() {
       }
     }
 
-    // UNCOMMENT FOR DEBUGGING
+    //UNCOMMENT FOR DEBUGGING
     // Serial.print("Menu Item: ");
 		// Serial.print(menuItem);
     // Serial.print(" | WaterTemp thresh:");
@@ -153,8 +153,7 @@ void loop() {
 		// Serial.println(edit);
   }
 
-
-  display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh,  menuItem, edit, mode);
+  display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode); //WHY DOES MENUITEM GIVE ERROR
 
 
   // if (mode != lastMode) {
