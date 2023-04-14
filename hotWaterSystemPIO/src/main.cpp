@@ -14,8 +14,8 @@ int mode = 0;
 int lastMode = 0;
 int waterTempThresh = 60;
 int airTempThresh = 50;
-int waterTemp = 0;
-int airTemp = 0;
+float waterTemp = 0;
+float airTemp = 0;
 int menuItem = 1;
 int waterLevel = 100;
 bool edit = 0;
@@ -154,7 +154,7 @@ void loop() {
   }
 
 
-  //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh,  menuItem, edit, mode);
+  display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh,  menuItem, edit, mode);
 
 
   // if (mode != lastMode) {

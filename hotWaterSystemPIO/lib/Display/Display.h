@@ -29,7 +29,7 @@ private:
 public:
     Display();
     void init();
-    void updateDisplay(long waterTemp, long setWaterTemp, long airTemp, long setAirTemp, int menuItem, bool edit, int mode);
+    void updateDisplay(float waterTemp, int setWaterTemp, float airTemp, int setAirTemp, int menuItem, bool edit, int mode);
     void displayWater(long waterTemp, long setWaterTemp);
     void displayAir(long airTemp, long setAirTemp);
     void displayFill(int mode);

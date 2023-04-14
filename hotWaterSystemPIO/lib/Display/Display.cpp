@@ -11,17 +11,18 @@ void Display::init() {
   oled.begin(i2c_Address, true); // Address 0x3C default
 }
 
-void Display::updateDisplay(long waterTemp, long setWaterTemp, long airTemp, long setAirTemp, int menuItem, bool edit, int mode) {
-    switch (menuItem) {
-        case 1:
-        displayWater(waterTemp, setWaterTemp);
-        break;
-        case 2:
-        displayAir(airTemp, setAirTemp);
-        break;
-        case 3:
-        displayFill(mode);
-    }
+void Display::updateDisplay(float waterTemp, int setWaterTemp, float airTemp, int setAirTemp, int menuItem, bool edit, int mode) {
+    // switch (menuItem) {
+    //     case 1:
+    //     displayWater(waterTemp, setWaterTemp);
+    //     break;
+    //     case 2:
+    //     displayAir(airTemp, setAirTemp);
+    //     break;
+    //     case 3:
+    //     displayFill(mode);
+    // }
+    displayWater(waterTemp, setWaterTemp);
     oled.display();
 }
 
@@ -37,10 +38,10 @@ void Display::displayWater(long waterTemp, long setWaterTemp){
   if (edit == false) {
     oled.setCursor(0, 18);
     oled.print("TEMP:");
-    oled.print(32);
+    oled.print(waterTemp);
     oled.setCursor(0, 40);
     oled.print("SET:");
-    oled.print(60);
+    oled.print(setWaterTemp);
   }
   else {
     oled.setCursor(0, 18);
