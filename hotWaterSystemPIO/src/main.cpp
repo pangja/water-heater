@@ -8,6 +8,7 @@
 #include <RotEncoder.h>
 #include <Pins.h>
 #include <TempSensor.h>
+#include <Display.h>
 
 int mode = 0;
 int lastMode = 0;
@@ -26,11 +27,12 @@ unsigned long lastMeasurementTime = 0;
 RotEncoder encoder(CLK, DT, SW);
 PowerButton OnButton(ONBUT);
 TempSensor tempSensors;
+Display display;
 
 void setup() {
   // put your setup code here, to run once:
   // display.init() initialise display
-   Serial.begin(9600); //For debugging
+  Serial.begin(9600); //For debugging
 }
 
 void loop() {
@@ -152,7 +154,7 @@ void loop() {
   }
 
 
-  // display.update()
+  //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh,  menuItem, edit, mode);
 
 
   // if (mode != lastMode) {
