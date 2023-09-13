@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "hotWaterSystem",
+			"path": ".."
+		},
+		{
+			"name": "hotWaterSystemPIO",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
