@@ -51,7 +51,7 @@ void loop() {
   //Serial.println(edit);
 
 
-  //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, 1, 1, mode); //WHY DOES MENUITEM GIVE ERROR
+  //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, 1, 1, mode);
 
   ////////////////////////////////////////////////////////////////////////////
   // modes: [0] off, [1] on, [2] fill
@@ -61,22 +61,22 @@ void loop() {
   // case [2]: pump off, diveter position (hot air), ball valve open
   /////////////////////////////////////////////////////////////////////////
 
-  // OnButton.readButton();
+  OnButton.readButton();
   
  
 
-  // if (OnButton.buttonState != OnButton.lastButtonState) {
+  if (OnButton.buttonState != OnButton.lastButtonState) {
+    Serial.println(OnButton.buttonState);
+    OnButton.lastButtonState = OnButton.buttonState;
+    if (OnButton.buttonState == 0) {
+      mode = 0;
+    }
+    else {
+      mode = 1;
+      fillCommand = 0;
+    }
     
-  //   OnButton.lastButtonState = OnButton.buttonState;
-  //   if (OnButton.buttonState == 0) {
-  //     mode = 0;
-  //   }
-  //   else {
-  //     mode = 1;
-  //     fillCommand = 0;
-  //   }
-    
-  // }
+  }
 
 
   /////////////////// Obtain Encoder Reading ////////////////////////
