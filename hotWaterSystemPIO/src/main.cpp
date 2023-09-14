@@ -28,6 +28,7 @@ RotEncoder encoder(CLK, DT, SW);
 PowerButton OnButton(ONBUT);
 TempSensor tempSensors;
 Display display;
+Relay pumpRelay(PUMPPIN);
 
 void setup() {
   Serial.begin(9600); 
@@ -62,9 +63,7 @@ void loop() {
   /////////////////////////////////////////////////////////////////////////
 
   OnButton.readButton();
-  
  
-
   if (OnButton.buttonState != OnButton.lastButtonState) {
     Serial.println(OnButton.buttonState);
     OnButton.lastButtonState = OnButton.buttonState;

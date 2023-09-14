@@ -8,4 +8,6 @@
 
 #define ONBUT 5
 
+#define PUMPPIN 7
+
 #endif
