@@ -12,7 +12,7 @@
 
 int mode = 0;
 int lastMode = 0;
-int waterTempThresh = 60;
+int waterTempThresh = 24;
 int airTempThresh = 24;
 float waterTemp = 0;
 float airTemp = 0;
@@ -20,6 +20,8 @@ int menuItem = 1;
 int waterLevel = 100;
 bool edit = false;
 int fillCommand = 0;
+int servo_pin = 9; // PWM pin for servo control
+int pos = 0;    // servo starting position
 
 unsigned long Ts = 3000; // temperature sampling time
 unsigned long lastMeasurementTime = 0;
@@ -29,14 +31,28 @@ PowerButton OnButton(ONBUT);
 TempSensor tempSensors;
 Display display;
 Relay pumpRelay(PUMPPIN);
+Diverter diverter;
+
+void diverterOpen()
+{
+  diverter.set(90);
+}
+
+void diverterClose()
+{
+  diverter.set(0);
+}
 
 void setup() {
   Serial.begin(9600); 
   display.init();
+  diverter.begin(servo_pin);
 }
 
 
 void loop() {
+
+  diverter.update();
 
   if (millis() - lastMeasurementTime > Ts) {
     lastMeasurementTime = millis();
@@ -223,10 +239,10 @@ void loop() {
         pumpRelay.triggerOff();
       }
       if (tempSensors.waterTemp < waterTempThresh) {
-        //diverter.open();
+        diverterOpen();
      }
       else if (tempSensors.waterTemp> waterTempThresh) {
-        //diverter.close();
+        diverterClose();;
       }
       //fillValve.close();
     break;
