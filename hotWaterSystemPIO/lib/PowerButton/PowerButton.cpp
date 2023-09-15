@@ -3,7 +3,8 @@
 PowerButton::PowerButton(int buttonPin){
     pin = buttonPin;
     pinMode(pin, INPUT);
-    lastButtonState = digitalRead(pin);
+    buttonState = 0;
+    lastButtonState = 2;
 }
 
 int PowerButton::readButton(){

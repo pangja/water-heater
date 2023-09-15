@@ -13,7 +13,7 @@
 int mode = 0;
 int lastMode = 0;
 int waterTempThresh = 60;
-int airTempThresh = 50;
+int airTempThresh = 24;
 float waterTemp = 0;
 float airTemp = 0;
 int menuItem = 1;
@@ -65,7 +65,8 @@ void loop() {
   OnButton.readButton();
  
   if (OnButton.buttonState != OnButton.lastButtonState) {
-    Serial.println(OnButton.buttonState);
+    lastMode = mode;
+    //Serial.println(OnButton.buttonState);
     OnButton.lastButtonState = OnButton.buttonState;
     if (OnButton.buttonState == 0) {
       mode = 0;
@@ -74,7 +75,6 @@ void loop() {
       mode = 1;
       fillCommand = 0;
     }
-    
   }
 
 
@@ -179,39 +179,38 @@ void loop() {
     display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
   }
 
+    if (mode != lastMode && mode == 0) {
+      pumpRelay.triggerOff();
+      //diverter.close();
+      //fillValve.close();
+    }
 
-  // if (mode != lastMode) {
-  //   lastMode = mode;
-  //   switch (mode) {
-  //     case 0:
-  //     pump.off();
-  //     diverter.close();
-  //     fillValve.close();
-  //       break;
-  //     case 1:
-  //     if (airTemp > airTempThresh) {
-  //       pump.on();
-  //     }
-  //     else if (airTemp < airTempThresh) {
-  //       pump.off();
-  //     }
-  //     if (waterTemp < waterTempThresh) {
-  //       diverter.open();
-  //     }
-  //     else if (waterTemp > waterTempThresh) {
-  //       diverter.close();
-  //     }
-  //     fillValve.close();
-  //       break;
-  //     case 2:
-  //     pump.off();
-  //     diverter.close();
-  //     if (waterLevel > 100) { // NNED TO RECHECK THIS STATEMENT
-  //       fillValve.close();
-  //     }
-  //     else if (waterLevel < 100)
-  //       fillValve.open();
-  //       break;
-  //   }
-  // }
+  //Serial.println(mode);
+
+  switch (mode) {
+    case 1:
+      if (tempSensors.airTemp > airTempThresh) {
+        pumpRelay.triggerOn();
+      }
+      else if (tempSensors.airTemp < airTempThresh) {
+        pumpRelay.triggerOff();
+      }
+      if (tempSensors.waterTemp < waterTempThresh) {
+        //diverter.open();
+     }
+      else if (tempSensors.waterTemp> waterTempThresh) {
+        //diverter.close();
+      }
+      //fillValve.close();
+    break;
+    case 2:
+    pumpRelay.triggerOff();
+    //diverter.close();
+      if (waterLevel > 100) { 
+        //fillValve.close();
+      }
+      else if (waterLevel < 100)
+        //fillValve.open();
+    break;
+}
 }
