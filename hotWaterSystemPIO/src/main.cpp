@@ -11,7 +11,7 @@
 #include <Display.h>
 
 int mode = 0;
-int lastMode = 0;
+int lastMode = 3;
 int waterTempThresh = 24;
 int airTempThresh = 24;
 float waterTemp = 0;
@@ -20,8 +20,9 @@ int menuItem = 1;
 int waterLevel = 100;
 bool edit = false;
 int fillCommand = 0;
-int servo_pin = 9; // PWM pin for servo control
 int pos = 0;    // servo starting position
+int previousMillis = 0;
+int interval = 50;
 
 unsigned long Ts = 3000; // temperature sampling time
 unsigned long lastMeasurementTime = 0;
@@ -33,20 +34,10 @@ Display display;
 Relay pumpRelay(PUMPPIN);
 Diverter diverter;
 
-void diverterOpen()
-{
-  diverter.set(90);
-}
-
-void diverterClose()
-{
-  diverter.set(0);
-}
-
 void setup() {
   Serial.begin(9600); 
   display.init();
-  diverter.begin(servo_pin);
+  diverter.begin(SERVOPIN);
 }
 
 
@@ -63,7 +54,7 @@ void loop() {
     // Serial.print("Air Temp: ");
     // Serial.println(tempSensors.airTemp);
 
-    display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
+    //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
   }
   //Serial.println(edit);
 
@@ -125,7 +116,7 @@ void loop() {
 		// Serial.print(" | edit: ");
 		// Serial.println(edit);
     //menuItem=1;
-    display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
+    //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
   }
 
   if (encoder.rotation == true) {
@@ -197,7 +188,7 @@ void loop() {
 		// Serial.print(" | edit: ");
 		// Serial.println(edit);
     //menuItem=1;
-    display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
+    //display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
   }
 
     if (OnButton.buttonState == 0 && menuItem == 3 && edit == true) {
@@ -222,11 +213,12 @@ void loop() {
     mode = 0;
   }
 
-    if (mode != lastMode && mode == 0) {
-      pumpRelay.triggerOff();
-      //diverter.close();
-      //fillValve.close();
-    }
+  if (mode != lastMode && mode == 0) {
+    pumpRelay.triggerOff();
+    diverter.close();
+    //fillValve.close();
+    lastMode = mode;
+  }
 
   //Serial.println(mode);
 
@@ -239,21 +231,21 @@ void loop() {
         pumpRelay.triggerOff();
       }
       if (tempSensors.waterTemp < waterTempThresh) {
-        diverterOpen();
+        diverter.open();
      }
       else if (tempSensors.waterTemp> waterTempThresh) {
-        diverterClose();;
+        diverter.close();
       }
       //fillValve.close();
     break;
     case 2:
-    pumpRelay.triggerOff();
-    //diverter.close();
-      if (waterLevel > 100) { 
-        //fillValve.close();
-      }
-      else if (waterLevel < 100)
-        //fillValve.open();
+      pumpRelay.triggerOff();
+      diverter.close();
+        if (waterLevel > 100) { 
+          //fillValve.close();
+        }
+        else if (waterLevel < 100)
+          //fillValve.open();
     break;
-}
+  }
 }

@@ -10,9 +10,13 @@ void Diverter::setSpeed(uint8_t newSpeed)
     interval = newSpeed;
 }
 
-void Diverter::set(uint16_t newTarget)
+void Diverter::close()
 {
-    target = newTarget;
+    target = 0;
+}
+
+void Diverter::open(){
+    target = 90;
 }
 
 void Diverter::update() 

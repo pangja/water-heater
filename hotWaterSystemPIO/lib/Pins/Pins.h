@@ -10,4 +10,6 @@
 
 #define PUMPPIN 7
 
+#define SERVOPIN 9
+
 #endif

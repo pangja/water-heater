@@ -16,7 +16,8 @@ public:
 
     void begin(int pin);
     void setSpeed(uint8_t newSpeed);
-    void set(uint16_t newTarget);
+    void open();
+    void close();
     void update();
 };
 
