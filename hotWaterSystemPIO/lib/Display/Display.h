@@ -33,6 +33,7 @@ public:
     void displayWater(float waterTemp, long setWaterTemp, bool edit);
     void displayAir(float airTemp, long setAirTemp, bool edit);
     void displayFill(int mode);
+    void setFilling(bool fillCommand);
 };
 
 #endif

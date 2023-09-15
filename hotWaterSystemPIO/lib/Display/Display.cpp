@@ -3,6 +3,10 @@
 Display::Display() {
 }
 
+void Display::setFilling(bool fillCommand) {
+  filling = fillCommand;
+}
+
 void Display::init() {
   //Serial.begin(9600);
   lastDisplayTime = millis();
@@ -35,6 +39,7 @@ void Display::updateDisplay(float waterTemp, int setWaterTemp, float airTemp, in
     }
 
     oled.display();
+
 }
 
 void Display::displayWater(float waterTemp, long setWaterTemp, bool edit){
@@ -139,8 +144,8 @@ void Display::displayFill(int mode){
     oled.print(F("FILL"));
   }
   else {
-    if (millis()-lastFillTime > 300) {
-      if (i < 4) {
+    if (millis()-lastFillTime > 100) {
+      if (i < 3) {
         i++;
       } else {
         i = 0;

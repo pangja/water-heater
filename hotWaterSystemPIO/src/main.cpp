@@ -21,7 +21,7 @@ int waterLevel = 100;
 bool edit = false;
 int fillCommand = 0;
 
-unsigned long Ts = 2000; // temperature sampling time
+unsigned long Ts = 3000; // temperature sampling time
 unsigned long lastMeasurementTime = 0;
 
 RotEncoder encoder(CLK, DT, SW);
@@ -112,7 +112,6 @@ void loop() {
     display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
   }
 
-  
   if (encoder.rotation == true) {
 
     encoder.rotation = false;
@@ -148,22 +147,28 @@ void loop() {
         else if (airTempThresh < 20) {
           airTempThresh = 20;
         }
-      case 3:
-        if (OnButton.buttonState == 0) {
-          fillCommand = fillCommand + encoder.val;
-          if (fillCommand >= 1) {
-            fillCommand = 1;
-            mode = 2;
-          }
-          else if (fillCommand <= 0) {
-            fillCommand = 0;
-            mode = 0;
-          }
-        }
+      // case 3:
+      //   if (OnButton.buttonState == 0) {
+      //     // fillCommand = fillCommand + encoder.val;
+      //     // if (fillCommand >= 1) {
+      //     //   fillCommand = 1;
+      //     //   display.setFilling(1);
+      //     //   mode = 2;
+      //     // }
+      //     // else if (fillCommand <= 0) {
+      //     //   fillCommand = 0;
+      //     //   display.setFilling(0);
+      //     //   mode = 0;
+      //     // }
+      //     fillCommand = 1;
+      //     display.setFilling(1);
+      //     mode = 2;
+      //   }
       default:
         break;
       }
     } 
+
     //UNCOMMENT FOR DEBUGGING
     // Serial.print("Menu Item: ");
 		// Serial.print(menuItem);
@@ -177,6 +182,28 @@ void loop() {
 		// Serial.println(edit);
     //menuItem=1;
     display.updateDisplay(tempSensors.waterTemp, waterTempThresh, tempSensors.airTemp, airTempThresh, menuItem, edit, mode);
+  }
+
+    if (OnButton.buttonState == 0 && menuItem == 3 && edit == true) {
+    // fillCommand = fillCommand + encoder.val;
+    // if (fillCommand >= 1) {
+    //   fillCommand = 1;
+    //   display.setFilling(1);
+    //   mode = 2;
+    // }
+    // else if (fillCommand <= 0) {
+    //   fillCommand = 0;
+    //   display.setFilling(0);
+    //   mode = 0;
+    // }
+    //fillCommand = 1;
+    display.setFilling(1);
+    mode = 2;
+  }
+  else if (menuItem == 3) {
+    //fillCommand = 0;
+    display.setFilling(0);
+    mode = 0;
   }
 
     if (mode != lastMode && mode == 0) {

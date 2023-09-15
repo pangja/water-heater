@@ -38,7 +38,7 @@ void RotEncoder::readEncoder(){
 	if (btnState == LOW) {
 		//if 50ms have passed since last LOW pulse, it means that the
 		//button has been pressed, released and pressed again
-		if (millis() - lastButtonPress > 50) {
+		if (millis() - lastButtonPress > 100) {
 			btnPress = true;
 		}
 		// Remember last button press event
