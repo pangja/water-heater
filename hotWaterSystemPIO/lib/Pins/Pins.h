@@ -12,4 +12,6 @@
 
 #define SERVOPIN 9
 
+#define VALVEPIN 10
+
 #endif
