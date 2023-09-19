@@ -6,11 +6,11 @@
 #define DT 3 
 #define SW 4
 
-#define ONBUT 5
+#define ONBUT 9
 
 #define PUMPPIN 7
 
-#define SERVOPIN 9
+#define SERVOPIN 5
 
 #define VALVEPIN 10
 
