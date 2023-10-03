@@ -8,7 +8,6 @@ void Display::setFilling(bool fillCommand) {
 }
 
 void Display::init() {
-  //Serial.begin(9600);
   lastDisplayTime = millis();
   lastFillTime = millis();
   delay(250); // wait for the OLED to power up

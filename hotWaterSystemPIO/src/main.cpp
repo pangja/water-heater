@@ -9,6 +9,7 @@
 #include <Pins.h>
 #include <TempSensor.h>
 #include <Display.h>
+#include <LevelSensor.h>
 
   ////////////////////////////////////////////////////////////////////////////
   // modes: [0] off, [1] on, [2] fill
@@ -42,6 +43,7 @@ Display display;
 Relay pumpRelay(PUMPPIN);
 Relay valveRelay(VALVEPIN);
 Diverter diverter;
+LevelSensor levelSensor(LEVELPIN);
 
 void setup() {
   Serial.begin(9600); 
@@ -166,21 +168,17 @@ void loop() {
       }
       if (tempSensors.waterTemp < waterTempThresh) {
         diverter.open();
-     }
+      }
       else if (tempSensors.waterTemp> waterTempThresh) {
         diverter.close();
       }
       break;
     case 2:   // OFF AND FILL
-      valveRelay.triggerOn();
-
-      // TODO WATER LEVEL
-        // if (waterLevel > 100) { 
-        //   fillValve.close();
-        // }
-        // else if (waterLevel < 100)
-        //   fillValve.open();
-
+        valveRelay.triggerOn();
+        levelSensor.readLevel();
+        if (levelSensor.full){ // CLOSES VALVE IF TANK TANK IS FULL
+          edit = false;
+        }
       break;
   }
 }

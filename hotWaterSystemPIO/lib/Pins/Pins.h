@@ -6,12 +6,14 @@
 #define DT 3 
 #define SW 4
 
-#define ONBUT 7
+#define ONBUT 40 //7 (correct value change to when new arduino arrives)
 
-#define PUMPPIN 8
+#define PUMPPIN 22
 
-#define SERVOPIN 5
+#define VALVEPIN 23 
 
-#define VALVEPIN 9
+#define SERVOPIN 11 //5 (correct pin change to when new arduino arrives)
+
+#define LEVELPIN 3
 
 #endif
