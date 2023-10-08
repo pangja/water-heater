@@ -12,11 +12,11 @@ void Diverter::setSpeed(uint8_t newSpeed)
 
 void Diverter::close()
 {
-    target = 0;
+    target = 5;
 }
 
 void Diverter::open(){
-    target = 90;
+    target = 180;
 }
 
 void Diverter::update() 
