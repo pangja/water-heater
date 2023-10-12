@@ -5,7 +5,7 @@ void Diverter::begin(int pin)
     servo.attach(pin);
 }
 
-void Diverter::setSpeed(uint8_t newSpeed)
+void Diverter::setSpeed(int newSpeed)
 {
     interval = newSpeed;
 }

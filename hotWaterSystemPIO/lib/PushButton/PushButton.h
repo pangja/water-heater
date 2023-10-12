@@ -7,8 +7,8 @@ class PushButton
 private:
     int pin;
     int buttonState;
-    long lastDebounceTime = 0;
-    int debounceDelay = 50;
+    unsigned long lastDebounceTime = 0;
+    unsigned long debounceDelay = 50;
 public:
     bool state;
 

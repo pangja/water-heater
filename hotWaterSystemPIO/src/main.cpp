@@ -20,8 +20,8 @@
   /////////////////////////////////////////////////////////////////////////
 
 int mode = 0;
-int waterTempThresh = 24;
-int airTempThresh = 24;
+int waterTempThresh = 35;
+int airTempThresh = 40;
 float waterTemp = 0;
 float airTemp = 0;
 int menuItem = 1;
@@ -29,8 +29,6 @@ int waterLevel = 100;
 bool edit = false;
 int fillCommand = 0;
 int pos = 0;    // servo starting position
-int previousMillis = 0;
-int interval = 50;
 bool updateMode = false;
 
 unsigned long Ts = 3000; // temperature sampling time

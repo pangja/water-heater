@@ -6,16 +6,16 @@
 class Diverter
 {
 private:
-    uint16_t target; //= 90;       // target angle
-    uint16_t current; //= 90;      // current angle
-    uint8_t interval = 20;      // delay time
-    uint32_t previousMillis = 0;
+    int target; //= 90;       // target angle
+    int current; //= 90;      // current angle
+    unsigned long interval = 20;      // delay time
+    unsigned long previousMillis = 0;
 
 public:
     Servo servo;
 
     void begin(int pin);
-    void setSpeed(uint8_t newSpeed);
+    void setSpeed(int newSpeed);
     void open();
     void close();
     void update();

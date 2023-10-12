@@ -22,8 +22,8 @@ private:
     bool flash = false;
     bool filling = false;
     int i = 0;
-    long lastDisplayTime;
-    long lastFillTime;
+    unsigned long lastDisplayTime;
+    unsigned long lastFillTime;
 
 public:
     int menu;
