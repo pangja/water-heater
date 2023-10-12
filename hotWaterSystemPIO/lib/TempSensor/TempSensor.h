@@ -12,8 +12,8 @@ private:
 public:
     float waterTemp;
     float airTemp; 
-    long aveWaterTemp;
-    long aveAirTemp;
+    //long aveWaterTemp;
+    //long aveAirTemp;
 
     TempSensor();
     void getTemperatures();

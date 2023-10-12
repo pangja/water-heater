@@ -1,12 +1,12 @@
 #include "PowerButton.h"
 
-PowerButton::PowerButton(int buttonPin){
+PowerButton::PowerButton(uint8_t buttonPin){
     pin = buttonPin;
     pinMode(pin, INPUT);
     buttonState = 0;
     lastButtonState = 2;
 }
 
-int PowerButton::readButton(){
+uint8_t PowerButton::readButton(){
     buttonState = digitalRead(pin);
 }

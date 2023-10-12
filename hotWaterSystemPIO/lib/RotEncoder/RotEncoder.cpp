@@ -1,6 +1,6 @@
 #include "RotEncoder.h"
 
-RotEncoder::RotEncoder(int CLK, int DT, int SW) {
+RotEncoder::RotEncoder(uint8_t CLK, uint8_t DT, uint8_t SW) {
     clk = CLK;
     dt = DT;
 	sw = SW;

@@ -5,13 +5,13 @@
 class PowerButton
 {
 private:
-    int pin;
+    uint8_t pin;
 public:
-    int buttonState;
-    int lastButtonState;
+    uint8_t buttonState;
+    uint8_t lastButtonState;
 
-    PowerButton(int buttonPin);
-    int readButton();
+    PowerButton(uint8_t buttonPin);
+    uint8_t readButton();
 };
 
 #endif

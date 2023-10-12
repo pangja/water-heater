@@ -14,20 +14,7 @@ void Display::init() {
   oled.begin(i2c_Address, true); // Address 0x3C default
 }
 
-void Display::updateDisplay(float waterTemp, int setWaterTemp, float airTemp, int setAirTemp, int menuItem, bool edit, int mode) {
-
-    // switch (menuItem) {
-    //     case 1:
-    //       displayWater(waterTemp, setWaterTemp, edit);
-    //       break;
-    //     case 2:
-    //       displayAir(airTemp, setAirTemp, edit);
-    //       break;
-    //     case 3:
-    //       displayFill(mode);
-    //       break;
-    // }
-
+void Display::updateDisplay(float waterTemp, uint8_t setWaterTemp, float airTemp, uint8_t setAirTemp, int8_t menuItem, bool edit, int8_t mode) {
 
     if(menuItem == 1){
       displayWater(waterTemp, setWaterTemp, edit);
@@ -41,14 +28,14 @@ void Display::updateDisplay(float waterTemp, int setWaterTemp, float airTemp, in
 
 }
 
-void Display::displayWater(float waterTemp, long setWaterTemp, bool edit){
+void Display::displayWater(float waterTemp, uint8_t setWaterTemp, bool edit){
   oled.clearDisplay();
   oled.drawLine(0, 10, 128, 10, SH110X_WHITE);
   oled.setCursor(0, 0);
   oled.setTextSize(1);
   oled.setTextColor(SH110X_WHITE);
-  const char* waterTitle = "WATER TEMPERATURE";
-  oled.print(waterTitle);
+  //const char* waterTitle = "WATER TEMPERATURE";
+  oled.print(F("WATER TEMPERATURE"));
   oled.setTextSize(2);
 
   if (edit == false) {
@@ -83,14 +70,14 @@ void Display::displayWater(float waterTemp, long setWaterTemp, bool edit){
 
 }
 
-void Display::displayAir(float airTemp, long setAirTemp, bool edit){
+void Display::displayAir(float airTemp,  uint8_t setAirTemp, bool edit){
   oled.clearDisplay();
   oled.drawLine(0, 10, 128, 10, SH110X_WHITE);
   oled.setCursor(0, 0);
   oled.setTextSize(1);
   oled.setTextColor(SH110X_WHITE);
-  const char* airTitle = "AIR TEMPERATURE";
-  oled.print(airTitle);
+  //const char* airTitle = "AIR TEMPERATURE";
+  oled.print(F("AIR TEMPERATURE"));
   // oled.print("AIR TEMPERATURE");
   oled.setTextSize(2);
 
@@ -126,7 +113,7 @@ void Display::displayAir(float airTemp, long setAirTemp, bool edit){
   }
 }
 
-void Display::displayFill(int mode){
+void Display::displayFill(int8_t mode){
   oled.clearDisplay();
   oled.drawLine(0, 10, 128, 10, SH110X_WHITE);
   oled.setCursor(0, 0);

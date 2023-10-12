@@ -5,10 +5,10 @@
 class LevelSensor
 {
 private:
-    int pin;
-    int level;
+    uint8_t pin;
+    uint8_t level;
 public:
-    LevelSensor(int levelPin);
+    LevelSensor(uint8_t levelPin);
     void readLevel();
     bool full;
 };

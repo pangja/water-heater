@@ -1,6 +1,6 @@
 #include "LevelSensor.h"
 
-LevelSensor::LevelSensor(int levelPin)
+LevelSensor::LevelSensor(uint8_t levelPin)
 {
     pin = levelPin;
 }

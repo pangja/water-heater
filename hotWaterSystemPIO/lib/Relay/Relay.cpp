@@ -1,6 +1,6 @@
 #include "Relay.h"
 
-Relay::Relay(int relayPin){
+Relay::Relay(uint8_t relayPin){
     pin = relayPin;
     pinMode(pin, OUTPUT);
 }

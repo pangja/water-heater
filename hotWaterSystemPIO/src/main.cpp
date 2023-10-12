@@ -3,7 +3,6 @@
 #include <Diverter.h>
 #include <LevelSensor.h>
 #include <PowerButton.h>
-#include <PushButton.h>
 #include <Relay.h>
 #include <RotEncoder.h>
 #include <Pins.h>
@@ -19,16 +18,15 @@
   // case [2]: pump off, diveter position (hot air), ball valve open
   /////////////////////////////////////////////////////////////////////////
 
-int mode = 0;
-int waterTempThresh = 35;
-int airTempThresh = 40;
+int8_t mode = 0;
+uint8_t waterTempThresh = 35;
+uint8_t airTempThresh = 40;
 float waterTemp = 0;
 float airTemp = 0;
-int menuItem = 1;
-int waterLevel = 100;
+int8_t menuItem = 1;
 bool edit = false;
-int fillCommand = 0;
-int pos = 0;    // servo starting position
+int8_t fillCommand = 0;
+int16_t pos = 0;    // servo starting position
 bool updateMode = false;
 
 unsigned long Ts = 3000; // temperature sampling time

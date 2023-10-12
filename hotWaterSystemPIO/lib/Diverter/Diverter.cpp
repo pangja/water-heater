@@ -1,11 +1,11 @@
 #include "Diverter.h"
 
-void Diverter::begin(int pin)
+void Diverter::begin(uint8_t pin)
 {
     servo.attach(pin);
 }
 
-void Diverter::setSpeed(int newSpeed)
+void Diverter::setSpeed(unsigned long newSpeed)
 {
     interval = newSpeed;
 }

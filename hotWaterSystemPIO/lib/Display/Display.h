@@ -21,7 +21,7 @@ private:
     Adafruit_SH1106G oled = Adafruit_SH1106G(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); 
     bool flash = false;
     bool filling = false;
-    int i = 0;
+    uint8_t i = 0;
     unsigned long lastDisplayTime;
     unsigned long lastFillTime;
 
@@ -29,10 +29,10 @@ public:
     int menu;
     Display();
     void init();
-    void updateDisplay(float waterTemp, int setWaterTemp, float airTemp, int setAirTemp, int menuItem, bool edit, int mode);
-    void displayWater(float waterTemp, long setWaterTemp, bool edit);
-    void displayAir(float airTemp, long setAirTemp, bool edit);
-    void displayFill(int mode);
+    void updateDisplay(float waterTemp, uint8_t setWaterTemp, float airTemp, uint8_t setAirTemp, int8_t menuItem, bool edit, int8_t mode);
+    void displayWater(float waterTemp, uint8_t setWaterTemp, bool edit);
+    void displayAir(float airTemp, uint8_t setAirTemp, bool edit);
+    void displayFill(int8_t mode);
     void setFilling(bool fillCommand);
 };
 

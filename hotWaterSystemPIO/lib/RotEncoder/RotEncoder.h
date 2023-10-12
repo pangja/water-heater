@@ -5,19 +5,19 @@
 class RotEncoder
 {
 private:
-    int clk;
-    int dt;
-    int sw;
-    int currentStateCLK;
-    int lastStateCLK;
+    uint8_t clk;
+    uint8_t dt;
+    uint8_t sw;
+    uint8_t currentStateCLK;
+    uint8_t lastStateCLK;
     unsigned long lastButtonPress = 0;
-    int btnState;
+    uint8_t btnState;
 
 public:
     bool rotation = false;
     bool btnPress = false;
-    int val;
-    RotEncoder(int clk, int dt, int sw);
+    int8_t val;
+    RotEncoder(uint8_t clk, uint8_t dt, uint8_t sw);
     void readEncoder();
 };
 

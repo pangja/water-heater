@@ -5,11 +5,9 @@
 class Relay
 {
 private:
-    int pin;
+    uint8_t pin;
 public:
-    int state;
-
-    Relay(int relayPin);
+    Relay(uint8_t relayPin);
     void triggerOn();
     void triggerOff();
 };
