@@ -47,7 +47,4 @@ void RotEncoder::readEncoder(){
 		//btnState = false;
 		btnPress = false;
 	}
-
-	// debounce the reading
-	delay(1);
 }
