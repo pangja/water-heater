@@ -5,7 +5,7 @@
 #include <PowerButton.h>
 #include <Relay.h>
 #include <RotEncoder.h>
-#include <Pins.h>
+#include <Pins.h>                  
 #include <TempSensor.h>
 #include <Display.h>
 #include <LevelSensor.h>
@@ -19,8 +19,8 @@
   /////////////////////////////////////////////////////////////////////////
 
 int8_t mode = 0;
-uint8_t waterTempThresh = 35;
-uint8_t airTempThresh = 40;
+uint8_t waterTempThresh = 40;
+uint8_t airTempThresh = 35;
 float waterTemp = 0;
 float airTemp = 0;
 int8_t menuItem = 1;
@@ -156,12 +156,18 @@ void loop() {
       break;
     case 1:   // ON
       valveRelay.triggerOff();
-      if (tempSensors.airTemp > airTempThresh) {
+      if (tempSensors.airTemp > airTempThresh && tempSensors.waterTemp < waterTempThresh) {
         pumpRelay.triggerOn();
       }
-      else if (tempSensors.airTemp < airTempThresh) {
+      else {
         pumpRelay.triggerOff();
       }
+      //if (tempSensors.airTemp > airTempThresh) {
+      //  pumpRelay.triggerOn();
+      //}
+      //else if (tempSensors.airTemp < airTempThresh) {
+      //  pumpRelay.triggerOff();
+      //}
       if (tempSensors.waterTemp < waterTempThresh) {
         diverter.open();
       }

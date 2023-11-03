@@ -12,11 +12,11 @@ void Diverter::setSpeed(unsigned long newSpeed)
 
 void Diverter::close()
 {
-    target = 5;
+    target = 180;                                                                                                                                                                                                      
 }
 
 void Diverter::open(){
-    target = 180;
+    target = 5;
 }
 
 void Diverter::update() 
